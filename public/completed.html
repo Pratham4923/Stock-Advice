@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Completed Trades — Live Stock Advice</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Completed Trades</h1>
+      <div class="actions">
+        <nav><a href="/">Live Trades</a></nav>
+        <button id="themeToggle" title="Toggle theme">Theme</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="stack">
+        <!-- Statistics Panel -->
+        <section class="panel">
+          <h2>Performance Statistics</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Total Trades</div>
+              <div class="stat-value" id="totalTrades">0</div>
+            </div>
+            <div class="stat-card stat-profit">
+              <div class="stat-label">Winning Trades</div>
+              <div class="stat-value" id="winningTrades">0</div>
+            </div>
+            <div class="stat-card stat-loss">
+              <div class="stat-label">Losing Trades</div>
+              <div class="stat-value" id="losingTrades">0</div>
+            </div>
+            <div class="stat-card stat-accuracy">
+              <div class="stat-label">Accuracy</div>
+              <div class="stat-value" id="accuracy">0%</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="panel filter-panel">
+          <h2 style="margin-bottom: 20px;">📊 Filter Trades</h2>
+          
+          <!-- Date Filter -->
+          <div class="filter-section">
+            <div class="filter-header">
+              <span class="filter-icon">📅</span>
+              <label class="filter-label">Date Range</label>
+            </div>
+            <div class="filter-content">
+              <input type="date" id="dateFrom" class="date-input" placeholder="From" />
+              <span style="color: var(--muted);">to</span>
+              <input type="date" id="dateTo" class="date-input" placeholder="To" />
+              <button class="btn btn-primary" id="btnApplyDate" style="padding: 10px 20px;">Apply</button>
+              <button class="btn" id="btnClearDate" style="padding: 10px 20px;">Clear</button>
+            </div>
+          </div>
+
+          <div class="filter-divider"></div>
+          
+          <!-- Category Filter -->
+          <div class="filter-section">
+            <div class="filter-header">
+              <span class="filter-icon">📂</span>
+              <label class="filter-label">Category</label>
+            </div>
+            <div class="filter-content">
+              <button class="btn filter-btn category-btn active" data-category="all">All</button>
+              <button class="btn filter-btn category-btn" data-category="stocks">📈 Stocks</button>
+              <button class="btn filter-btn category-btn" data-category="options">🎯 Options</button>
+              <button class="btn filter-btn category-btn" data-category="futures">⚡ Futures</button>
+              <button class="btn filter-btn category-btn" data-category="options-hedge">🛡️ Options Hedge</button>
+              <button class="btn filter-btn category-btn" data-category="futures-options-hedge">🔒 F&O Hedge</button>
+            </div>
+          </div>
+
+          <div class="filter-divider"></div>
+          
+          <!-- Trade Type Filter -->
+          <div class="filter-section">
+            <div class="filter-header">
+              <span class="filter-icon">⚡</span>
+              <label class="filter-label">Trade Type</label>
+            </div>
+            <div class="filter-content">
+              <button class="btn filter-btn type-btn active" data-type="all">All</button>
+              <button class="btn filter-btn type-btn" data-type="scalping">⚡ Scalping</button>
+              <button class="btn filter-btn type-btn" data-type="intraday">📊 Intraday</button>
+              <button class="btn filter-btn type-btn" data-type="swing">🔄 Swing</button>
+              <button class="btn filter-btn type-btn" data-type="positional">📈 Positional</button>
+            </div>
+          </div>
+
+          <div class="filter-divider"></div>
+          
+          <!-- Result Filter -->
+          <div class="filter-section">
+            <div class="filter-header">
+              <span class="filter-icon">💰</span>
+              <label class="filter-label">Result</label>
+            </div>
+            <div class="filter-content">
+              <button class="btn filter-btn result-btn active" data-result="all">All</button>
+              <button class="btn filter-btn result-btn" data-result="profit">✅ Profit</button>
+              <button class="btn filter-btn result-btn" data-result="loss">❌ Loss</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Completed Trades List -->
+        <section class="panel">
+          <h2>Trade History</h2>
+          <div id="completedFeed" class="feed">
+            <div id="completedEmpty" class="empty muted">No completed trades yet.</div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toastWrap" class="toast-container"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/theme.js" defer></script>
+    <script src="/completed.js" defer></script>
+  </body>
+</html>

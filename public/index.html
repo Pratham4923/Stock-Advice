@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Live Stock Advice</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Live Stock Advice</h1>
+      <div class="actions">
+        <nav><a href="/completed.html">View Performance</a></nav>
+        <button id="themeToggle" title="Toggle theme">Theme</button>
+      </div>
+    </header>
+
+    <!-- Category Filter -->
+    <div class="category-nav">
+      <div class="container" style="max-width: 1080px; margin: 0 auto; padding: 0 12px;">
+        <div class="category-buttons">
+          <button class="category-nav-btn active" data-category="all">All</button>
+          <button class="category-nav-btn" data-category="stocks">📈 Stocks</button>
+          <button class="category-nav-btn" data-category="options">🎯 Options</button>
+          <button class="category-nav-btn" data-category="futures">⚡ Futures</button>
+          <button class="category-nav-btn" data-category="options-hedge">🛡️ Options Hedge</button>
+          <button class="category-nav-btn" data-category="futures-options-hedge">🔒 F&O Hedge</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <section class="stack">
+        <section class="panel">
+          <h2>Scalping / Intraday Trading</h2>
+          <div id="feedSI" class="feed" aria-live="polite">
+            <div id="feedSIEmpty" class="empty muted">No messages yet for Scalping/Intraday.</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Swing Trading</h2>
+          <div id="feedSwing" class="feed" aria-live="polite">
+            <div id="feedSwingEmpty" class="empty muted">No messages yet for Swing trades.</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Positional Trading</h2>
+          <div id="feedPos" class="feed" aria-live="polite">
+            <div id="feedPosEmpty" class="empty muted">No messages yet for Positional trades.</div>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel note">
+        <p><strong>Disclaimer:</strong> Information shared here is for educational purposes only and is <em>not</em> financial advice. Do your own research.</p>
+      </section>
+    </main>
+
+    <div id="toastWrap" class="toast-container"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/theme.js" defer></script>
+    <script src="/client.js" defer></script>
+  </body>
+</html>

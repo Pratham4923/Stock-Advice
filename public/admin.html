@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin — Live Stock Advice</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <h1>Admin Console</h1>
+        <div id="online" class="online">Online: --</div>
+      </div>
+      <div class="actions">
+        <button id="themeToggle" title="Toggle theme">Theme</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="stack">
+        <section class="panel" id="loginPanel">
+          <h2>Admin Login</h2>
+          <form id="loginForm" class="form" autocomplete="off">
+            <label>
+              Admin key
+              <input id="loginKey" type="password" placeholder="Enter admin key" />
+            </label>
+            <button type="submit" class="btn-primary">Login</button>
+            <p id="loginMsg" class="muted"></p>
+          </form>
+        </section>
+
+        <section id="console" class="stack hidden">
+          <section class="panel">
+            <h2>Broadcast Advice</h2>
+            <form id="advForm" class="form" autocomplete="off">
+              <label>
+                Category
+                <div class="btn-group" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <button type="button" class="btn-toggle" data-value="stocks" id="btnStocks">Stocks</button>
+                  <button type="button" class="btn-toggle" data-value="options" id="btnOptions">Options</button>
+                  <button type="button" class="btn-toggle" data-value="futures" id="btnFutures">Futures</button>
+                  <button type="button" class="btn-toggle" data-value="options-hedge" id="btnOptionsHedge">Options Hedge</button>
+                  <button type="button" class="btn-toggle" data-value="futures-options-hedge" id="btnFuturesOptionsHedge">F&O Hedge</button>
+                </div>
+              </label>
+              <label>
+                Trade Type
+                <div class="btn-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                  <button type="button" class="btn-toggle" data-value="Scalping Trade" id="btnScalping">Scalping</button>
+                  <button type="button" class="btn-toggle" data-value="Intraday Trade" id="btnIntraday">Intraday</button>
+                  <button type="button" class="btn-toggle" data-value="Swing Trade" id="btnSwing">Swing</button>
+                  <button type="button" class="btn-toggle" data-value="Positional Trade" id="btnPositional">Positional</button>
+                </div>
+              </label>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <label>
+                  Order Side
+                  <div class="btn-group">
+                    <button type="button" class="btn-toggle" data-value="BUY" id="btnBuy">BUY</button>
+                    <button type="button" class="btn-toggle" data-value="SELL" id="btnSell">SELL</button>
+                  </div>
+                </label>
+                <label id="optionTypeLabel">
+                  Option Type
+                  <div class="btn-group">
+                    <button type="button" class="btn-toggle" data-value="CE" id="btnCE">CE</button>
+                    <button type="button" class="btn-toggle" data-value="PE" id="btnPE">PE</button>
+                  </div>
+                </label>
+              </div>
+              <label id="symbolLabel">
+                Symbol
+                <div style="position: relative;">
+                  <input id="advSymbol" type="text" placeholder="Search symbol..." autocomplete="off" />
+                  <div id="symbolDropdown" class="symbol-dropdown hidden"></div>
+                </div>
+              </label>
+              <label style="display: none;">
+                Symbol (Hidden Select for data)
+                <select id="advSymbolHidden">
+                  <option value="" selected disabled>Select symbol</option>
+                  <option>AARTIIND</option>
+                  <option>ABB</option>
+                  <option>ABBOTINDIA</option>
+                  <option>ABCAPITAL</option>
+                  <option>ABFRL</option>
+                  <option>ACC</option>
+                  <option>ADANIENT</option>
+                  <option>ADANIPORTS</option>
+                  <option>ALKEM</option>
+                  <option>AMARAJABAT</option>
+                  <option>AMBUJACEM</option>
+                  <option>APOLLOHOSP</option>
+                  <option>APOLLOTYRE</option>
+                  <option>ASHOKLEY</option>
+                  <option>ASIANPAINT</option>
+                  <option>ASTRAL</option>
+                  <option>ATUL</option>
+                  <option>AUBANK</option>
+                  <option>AUROPHARMA</option>
+                  <option>AXISBANK</option>
+                  <option>BAJAJ-AUTO</option>
+                  <option>BAJAJFINSV</option>
+                  <option>BAJFINANCE</option>
+                  <option>BALKRISIND</option>
+                  <option>BALRAMCHIN</option>
+                  <option>BANDHANBNK</option>
+                  <option>BANKBARODA</option>
+                  <option>BANK NIFTY</option>
+                  <option>BATAINDIA</option>
+                  <option>BEL</option>
+                  <option>BERGEPAINT</option>
+                  <option>BHARATFORG</option>
+                  <option>BHARTIARTL</option>
+                  <option>BHEL</option>
+                  <option>BIOCON</option>
+                  <option>BOSCHLTD</option>
+                  <option>BPCL</option>
+                  <option>BRITANNIA</option>
+                  <option>BSOFT</option>
+                  <option>CANBK</option>
+                  <option>CANFINHOME</option>
+                  <option>CHAMBLFERT</option>
+                  <option>CHOLAFIN</option>
+                  <option>CIPLA</option>
+                  <option>COALINDIA</option>
+                  <option>COFORGE</option>
+                  <option>COLPAL</option>
+                  <option>CONCOR</option>
+                  <option>COROMANDEL</option>
+                  <option>CROMPTON</option>
+                  <option>CUB</option>
+                  <option>CUMMINSIND</option>
+                  <option>DABUR</option>
+                  <option>DALBHARAT</option>
+                  <option>DEEPAKNTR</option>
+                  <option>DELTACORP</option>
+                  <option>DIVISLAB</option>
+                  <option>DIXON</option>
+                  <option>DLF</option>
+                  <option>DRREDDY</option>
+                  <option>EICHERMOT</option>
+                  <option>ESCORTS</option>
+                  <option>EXIDEIND</option>
+                  <option>FEDERALBNK</option>
+                  <option>FINNIFTY</option>
+                  <option>FSL</option>
+                  <option>GAIL</option>
+                  <option>GLENMARK</option>
+                  <option>GMRINFRA</option>
+                  <option>GNFC</option>
+                  <option>GODREJCP</option>
+                  <option>GODREJPROP</option>
+                  <option>GRANULES</option>
+                  <option>GRASIM</option>
+                  <option>GSPL</option>
+                  <option>GUJGASLTD</option>
+                  <option>HAL</option>
+                  <option>HAVELLS</option>
+                  <option>HCLTECH</option>
+                  <option>HDFC</option>
+                  <option>HDFCAMC</option>
+                  <option>HDFCBANK</option>
+                  <option>HDFCLIFE</option>
+                  <option>HEROMOTOCO</option>
+                  <option>HINDALCO</option>
+                  <option>HINDCOPPER</option>
+                  <option>HINDPETRO</option>
+                  <option>HINDUNILVR</option>
+                  <option>HONAUT</option>
+                  <option>IBULHSGFIN</option>
+                  <option>ICICIBANK</option>
+                  <option>ICICIGI</option>
+                  <option>ICICIPRULI</option>
+                  <option>IDEA</option>
+                  <option>IDFC</option>
+                  <option>IDFCFIRSTB</option>
+                  <option>IEX</option>
+                  <option>IGL</option>
+                  <option>INDHOTEL</option>
+                  <option>INDIACEM</option>
+                  <option>INDIAMART</option>
+                  <option>INDIGO</option>
+                  <option>INDUSINDBK</option>
+                  <option>INDUSTOWER</option>
+                  <option>INFY</option>
+                  <option>INTELLECT</option>
+                  <option>IOC</option>
+                  <option>IPCALAB</option>
+                  <option>IRCTC</option>
+                  <option>ITC</option>
+                  <option>JINDALSTEL</option>
+                  <option>JKCEMENT</option>
+                  <option>JSWSTEEL</option>
+                  <option>JUBLFOOD</option>
+                  <option>KOTAKBANK</option>
+                  <option>L&amp;TFH</option>
+                  <option>LALPATHLAB</option>
+                  <option>LAURUSLABS</option>
+                  <option>LICHSGFIN</option>
+                  <option>LT</option>
+                  <option>LTI</option>
+                  <option>LTTS</option>
+                  <option>LUPIN</option>
+                  <option>M&amp;M</option>
+                  <option>M&amp;MFIN</option>
+                  <option>MANAPPURAM</option>
+                  <option>MARICO</option>
+                  <option>MARUTI</option>
+                  <option>MCDOWELL-N</option>
+                  <option>MCX</option>
+                  <option>METROPOLIS</option>
+                  <option>MFSL</option>
+                  <option>MGL</option>
+                  <option>MIDCAP NIFTY</option>
+                  <option>MINDTREE</option>
+                  <option>MOTHERSON</option>
+                  <option>MPHASIS</option>
+                  <option>MRF</option>
+                  <option>MUTHOOTFIN</option>
+                  <option>NATIONALUM</option>
+                  <option>NAUKRI</option>
+                  <option>NAVINFLUOR</option>
+                  <option>NESTLEIND</option>
+                  <option>NIFTY</option>
+                  <option>NMDC</option>
+                  <option>NTPC</option>
+                  <option>OBEROIRLTY</option>
+                  <option>OFSS</option>
+                  <option>ONGC</option>
+                  <option>PAGEIND</option>
+                  <option>PEL</option>
+                  <option>PERSISTENT</option>
+                  <option>PETRONET</option>
+                  <option>PFC</option>
+                  <option>PIDILITIND</option>
+                  <option>PIIND</option>
+                  <option>PNB</option>
+                  <option>POLYCAB</option>
+                  <option>POWERGRID</option>
+                  <option>PVR</option>
+                  <option>RAIN</option>
+                  <option>RAMCOCEM</option>
+                  <option>RBLBANK</option>
+                  <option>RECLTD</option>
+                  <option>RELIANCE</option>
+                  <option>SAIL</option>
+                  <option>SBICARD</option>
+                  <option>SBILIFE</option>
+                  <option>SBIN</option>
+                  <option>SHREECEM</option>
+                  <option>SIEMENS</option>
+                  <option>SRF</option>
+                  <option>SRTRANSFIN</option>
+                  <option>SUNPHARMA</option>
+                  <option>SUNTV</option>
+                  <option>SYNGENE</option>
+                  <option>TATACHEM</option>
+                  <option>TATACOMM</option>
+                  <option>TATACONSUM</option>
+                  <option>TATAMOTORS</option>
+                  <option>TATAPOWER</option>
+                  <option>TATASTEEL</option>
+                  <option>TCS</option>
+                  <option>TECHM</option>
+                  <option>TITAN</option>
+                  <option>TORNTPHARM</option>
+                  <option>TORNTPOWER</option>
+                  <option>TRENT</option>
+                  <option>TVSMOTOR</option>
+                  <option>UBL</option>
+                  <option>ULTRACEMCO</option>
+                  <option>UPL</option>
+                  <option>VEDL</option>
+                  <option>VOLTAS</option>
+                  <option>WHIRLPOOL</option>
+                  <option>WIPRO</option>
+                  <option>ZEEL</option>
+                  <option>ZYDUSLIFE</option>
+                </select>
+              </label>
+              <label id="strikePriceLabel">
+                Strike Price
+                <input id="advStrike" type="number" inputmode="decimal" placeholder="e.g. 450" />
+              </label>
+              
+              <!-- Options Hedge: Second Option -->
+              <div id="optionsHedgeFields" style="display: none;">
+                <h3 style="margin: 16px 0 12px 0; font-size: 16px; color: var(--text);">Second Option Leg</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                  <label>
+                    Order Side 2
+                    <div class="btn-group">
+                      <button type="button" class="btn-toggle" data-value="BUY" id="btnBuy2">BUY</button>
+                      <button type="button" class="btn-toggle" data-value="SELL" id="btnSell2">SELL</button>
+                    </div>
+                  </label>
+                  <label>
+                    Option Type 2
+                    <div class="btn-group">
+                      <button type="button" class="btn-toggle" data-value="CE" id="btnCE2">CE</button>
+                      <button type="button" class="btn-toggle" data-value="PE" id="btnPE2">PE</button>
+                    </div>
+                  </label>
+                </div>
+                <label>
+                  Strike Price 2
+                  <input id="advStrike2" type="number" inputmode="decimal" placeholder="e.g. 500" />
+                </label>
+              </div>
+              
+              <!-- F&O Hedge: Futures Leg -->
+              <div id="foHedgeFields" style="display: none;">
+                <h3 style="margin: 16px 0 12px 0; font-size: 16px; color: var(--text);">Futures Leg</h3>
+                <label>
+                  Futures Side
+                  <div class="btn-group">
+                    <button type="button" class="btn-toggle" data-value="BUY" id="btnFuturesBuy">BUY</button>
+                    <button type="button" class="btn-toggle" data-value="SELL" id="btnFuturesSell">SELL</button>
+                  </div>
+                </label>
+              </div>
+              <label>
+                Order Type
+                <div class="btn-group">
+                  <button type="button" class="btn-toggle" data-value="MARKET" id="btnMarket">Market Price</button>
+                  <button type="button" class="btn-toggle" data-value="LIMIT" id="btnLimit">Limit Price</button>
+                </div>
+              </label>
+              <label id="limitPriceLabel" style="display: none;">
+                Limit Price
+                <input id="advLimitPrice" type="number" inputmode="decimal" placeholder="Enter limit price" />
+              </label>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <label>
+                  Stop Loss
+                  <input id="advStopLoss" type="number" inputmode="decimal" placeholder="Optional" />
+                </label>
+                <label>
+                  Take Profit
+                  <input id="advTakeProfit" type="number" inputmode="decimal" placeholder="Optional" />
+                </label>
+              </div>
+              <button type="submit" class="btn-primary">Broadcast</button>
+              <p id="advMsg" class="muted"></p>
+            </form>
+          </section>
+
+        <section class="panel">
+          <h2>📈 Current Trades</h2>
+          <div class="toolbar" style="display:flex; gap:8px; align-items:center; justify-content: space-between; margin-bottom:16px; flex-wrap: wrap;">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <label style="display:inline-flex; gap:6px; align-items:center; font-size:13px; color: var(--muted);">
+                <input type="checkbox" id="chkSelectAllCurrent" /> Select all
+              </label>
+              <button id="btnDeleteSelectedCurrent" class="btn btn-danger">Delete selected</button>
+            </div>
+            <button id="btnClearAll" class="btn btn-danger">Delete all</button>
+          </div>
+          <div class="table-wrapper">
+            <table class="trade-table" id="currentTradeTable">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="chkSelectAllCurrentTable" /></th>
+                  <th>Time</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Symbol</th>
+                  <th>Details</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="currentTradeTableBody">
+                <tr>
+                  <td colspan="7" class="empty-table">No active trades</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>📊 Trade History</h2>
+          
+          <!-- Performance Statistics -->
+          <div class="stats-grid" style="margin-bottom: 24px;">
+            <div class="stat-card">
+              <div class="stat-label">Total Trades</div>
+              <div class="stat-value" id="historyTotalTrades">0</div>
+            </div>
+            <div class="stat-card stat-profit">
+              <div class="stat-label">Winning Trades</div>
+              <div class="stat-value" id="historyWinningTrades">0</div>
+            </div>
+            <div class="stat-card stat-loss">
+              <div class="stat-label">Losing Trades</div>
+              <div class="stat-value" id="historyLosingTrades">0</div>
+            </div>
+            <div class="stat-card stat-accuracy">
+              <div class="stat-label">Accuracy</div>
+              <div class="stat-value" id="historyAccuracy">0%</div>
+            </div>
+          </div>
+          
+          <div class="toolbar" style="display:flex; gap:8px; align-items:center; justify-content: flex-end; margin-bottom:16px; flex-wrap: wrap;">
+            <button id="btnClearHistory" class="btn btn-danger">Clear History</button>
+          </div>
+          <div id="historyFeed" class="feed">
+            <div id="historyEmpty" class="empty muted">No completed trades</div>
+          </div>
+        </section>
+        </section>
+      </section>
+    </main>
+
+    <div id="toastWrap" class="toast-container"></div>
+    <div id="confirmModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+      <div class="modal-box">
+        <h3 id="confirmTitle" style="margin-top:0;">Confirm deletion</h3>
+        <p id="confirmText" class="muted">This action cannot be undone.</p>
+        <label class="form" style="margin-top:8px;">
+          <span>Type DELETE to confirm</span>
+          <input id="confirmInput" type="text" placeholder="DELETE" />
+        </label>
+        <div class="modal-actions">
+          <button id="confirmCancel" class="btn">Cancel</button>
+          <button id="confirmOk" class="btn btn-danger" disabled>Delete</button>
+        </div>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/theme.js" defer></script>
+    <script src="/admin.js" defer></script>
+  </body>
+</html>
